@@ -5,27 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran - Coding Academy</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; }
-        nav { background-color: #2c3e50; padding: 15px; text-align: center; }
-        nav a { color: white; text-decoration: none; padding: 10px 20px; font-weight: bold; margin: 0 5px; border-radius: 5px; }
-        nav a:hover { background-color: #34495e; }
-        .active { background-color: #3498db; }
-        .container { max-width: 600px; margin: 30px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #2c3e50; margin-bottom: 25px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
-        input[type="text"], input[type="number"], input[type="tel"], textarea, select { 
-            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; 
-        }
-        .radio-group { margin-top: 5px; }
-        .radio-group input { margin-right: 5px; }
-        button { background-color: #2c3e50; color: white; border: none; padding: 12px 20px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button:hover { background-color: #3498db; }
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; color: #334155; line-height: 1.6; }
+
+        /* Navigation Bar Modern */
+        nav { background: #1e293b; padding: 1rem 2rem; display: flex; justify-content: center; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        nav a { color: #cbd5e1; text-decoration: none; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
+        nav a:hover { background: #334155; color: #fff; }
+        nav a.active { background: #3b82f6; color: #fff; }
+
+        /* Layout Container */
+        .container { max-width: 650px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+        .page-title { text-align: center; margin: 2.5rem 0 1.5rem; color: #0f172a; font-size: 2.2rem; font-weight: 600; }
         
-        #hasil-container { margin-top: 30px; padding: 20px; background-color: #e8f8f5; border-left: 5px solid #1abc9c; display: none; }
-        #hasil-container h3 { margin-top: 0; color: #16a085; }
-        .hasil-item { margin-bottom: 8px; }
-        .hasil-item strong { display: inline-block; width: 180px; }
+        /* Form Card */
+        .form-card { 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
+            border: 1px solid #e2e8f0; 
+            animation: fadeIn 0.5s ease-out; 
+        }
+
+        /* Input Fields */
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; color: #475569; font-weight: 600; font-size: 0.95rem; }
+        input[type="text"], input[type="number"], input[type="tel"], textarea, select {
+            width: 100%; 
+            padding: 0.8rem 1rem; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px; 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 0.95rem; 
+            color: #1e293b; 
+            background-color: #f8fafc; 
+            transition: all 0.3s ease;
+        }
+        /* Efek nyala biru saat sedang mengetik */
+        input:focus, textarea:focus, select:focus { 
+            outline: none; 
+            border-color: #3b82f6; 
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); 
+            background-color: #fff; 
+        }
+
+        /* Radio Buttons */
+        .radio-group { display: flex; gap: 2rem; padding: 0.5rem 0; }
+        .radio-group label { margin-bottom: 0; font-weight: 400; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: #1e293b;}
+        .radio-group input { width: 18px; height: 18px; cursor: pointer; accent-color: #3b82f6; }
+
+        /* Button Styling */
+        button { 
+            background: linear-gradient(135deg, #3b82f6, #2563eb); 
+            color: white; 
+            border: none; 
+            padding: 1rem; 
+            width: 100%; 
+            border-radius: 8px; 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+            margin-top: 1rem; 
+        }
+        button:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4); 
+        }
+        button:active { transform: translateY(0); }
+        
+        /* Kotak Hasil Pendaftaran */
+        #hasil-container { 
+            margin-top: 2.5rem; 
+            padding: 1.5rem 2rem; 
+            background-color: #ecfdf5; 
+            border: 1px solid #34d399; 
+            border-radius: 12px; 
+            display: none; 
+            animation: slideDown 0.5s ease-out; 
+            box-shadow: 0 4px 6px -1px rgba(52, 211, 153, 0.2);
+        }
+        #hasil-container h3 { 
+            color: #059669; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.2rem; 
+            border-bottom: 2px dashed #a7f3d0; 
+            padding-bottom: 0.8rem; 
+        }
+        .hasil-item { display: flex; margin-bottom: 0.75rem; font-size: 1rem; }
+        .hasil-item strong { width: 180px; color: #065f46; }
+        .hasil-item span { color: #0f172a; font-weight: 600; }
+        
+        /* Animasi */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -36,74 +113,74 @@
     </nav>
 
     <div class="container">
-        <h1>Pendaftaran Coding Academy</h1>
+        <h1 class="page-title">Pendaftaran Bootcamp</h1>
         
-        <form id="formPendaftaran">
-            <div class="form-group">
-                <label for="nik">NIK</label>
-                <input type="number" id="nik" required placeholder="Masukkan 16 digit NIK">
-            </div>
-            
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" required placeholder="Masukkan Nama Lengkap">
-            </div>
-            
-            <div class="form-group">
-                <label>Jenis Kelamin</label>
-                <div class="radio-group">
-                    <input type="radio" id="jk_l" name="jk" value="Laki-laki" required> <label for="jk_l" style="display:inline; font-weight:normal;">Laki-laki</label> &nbsp;&nbsp;
-                    <input type="radio" id="jk_p" name="jk" value="Perempuan" required> <label for="jk_p" style="display:inline; font-weight:normal;">Perempuan</label>
+        <div class="form-card">
+            <form id="formPendaftaran">
+                <div class="form-group">
+                    <label for="nik">Nomor Induk Kependudukan (NIK)</label>
+                    <input type="number" id="nik" required placeholder="Masukkan 16 digit NIK">
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="nohp">No. HP</label>
-                <input type="tel" id="nohp" required placeholder="Contoh: 08123456789">
-            </div>
-            
-            <div class="form-group">
-                <label for="alamat">Alamat Lengkap</label>
-                <textarea id="alamat" rows="3" required placeholder="Masukkan Alamat Lengkap"></textarea>
-            </div>
+                
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" required placeholder="Contoh: Muhammad Habib Rayhan">
+                </div>
+                
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <div class="radio-group">
+                        <label for="jk_l"><input type="radio" id="jk_l" name="jk" value="Laki-laki" required> Laki-laki</label>
+                        <label for="jk_p"><input type="radio" id="jk_p" name="jk" value="Perempuan" required> Perempuan</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nohp">No. Handphone / WhatsApp</label>
+                    <input type="tel" id="nohp" required placeholder="Contoh: 081234567890">
+                </div>
+                
+                <div class="form-group">
+                    <label for="alamat">Alamat Lengkap</label>
+                    <textarea id="alamat" rows="4" required placeholder="Tuliskan alamat lengkap domisili saat ini..."></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="bahasa">Pilihan Bahasa Pemrograman yang Diminati</label>
-                <select id="bahasa" required>
-                    <option value="">-- Pilih Bahasa --</option>
-                    <option value="Golang">Golang (Go)</option>
-                    <option value="Python">Python</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="PHP">PHP</option>
-                    <option value="Java">Java</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="bahasa">Bahasa Pemrograman yang Diminati</label>
+                    <select id="bahasa" required>
+                        <option value="" disabled selected>-- Pilih Bahasa Pemrograman --</option>
+                        <option value="Golang">Golang (Go) - Backend</option>
+                        <option value="Python">Python - Data/AI</option>
+                        <option value="JavaScript">JavaScript - Fullstack</option>
+                        <option value="PHP">PHP - Web Dev</option>
+                        <option value="Java">Java - Enterprise</option>
+                    </select>
+                </div>
 
-            <button type="submit">Simpan Pendaftaran</button>
-        </form>
+                <button type="submit">Konfirmasi & Simpan</button>
+            </form>
+        </div>
 
         <!-- Tempat menampilkan hasil pendaftaran -->
         <div id="hasil-container">
-            <h3>Pendaftaran Berhasil! Berikut Data Anda:</h3>
-            <div class="hasil-item"><strong>NIK:</strong> <span id="res-nik"></span></div>
-            <div class="hasil-item"><strong>Nama Lengkap:</strong> <span id="res-nama"></span></div>
-            <div class="hasil-item"><strong>Jenis Kelamin:</strong> <span id="res-jk"></span></div>
-            <div class="hasil-item"><strong>No. HP:</strong> <span id="res-nohp"></span></div>
-            <div class="hasil-item"><strong>Alamat:</strong> <span id="res-alamat"></span></div>
-            <div class="hasil-item"><strong>Bahasa Peminatan:</strong> <span id="res-bahasa"></span></div>
+            <h3>🎉 Pendaftaran Berhasil Disimpan!</h3>
+            <div class="hasil-item"><strong>NIK</strong> <span>: <span id="res-nik"></span></span></div>
+            <div class="hasil-item"><strong>Nama Lengkap</strong> <span>: <span id="res-nama"></span></span></div>
+            <div class="hasil-item"><strong>Jenis Kelamin</strong> <span>: <span id="res-jk"></span></span></div>
+            <div class="hasil-item"><strong>No. HP</strong> <span>: <span id="res-nohp"></span></span></div>
+            <div class="hasil-item"><strong>Alamat</strong> <span>: <span id="res-alamat"></span></span></div>
+            <div class="hasil-item"><strong>Peminatan</strong> <span>: <span id="res-bahasa"></span></span></div>
         </div>
     </div>
 
     <script>
         document.getElementById('formPendaftaran').addEventListener('submit', function(event) {
-            // Mencegah form melakukan refresh halaman (default behavior)
-            event.preventDefault();
+            event.preventDefault(); // Mencegah reload halaman
 
-            // Memunculkan dialog konfirmasi sesuai permintaan tugas
-            let konfirmasi = confirm("Apakah Anda sudah yakin untuk menyimpan?");
+            let konfirmasi = confirm("Apakah Anda sudah yakin untuk menyimpan data ini?");
             
             if (konfirmasi) {
-                // Mengambil nilai dari form
+                // Ambil data
                 let nik = document.getElementById('nik').value;
                 let nama = document.getElementById('nama').value;
                 let jk = document.querySelector('input[name="jk"]:checked').value;
@@ -111,7 +188,7 @@
                 let alamat = document.getElementById('alamat').value;
                 let bahasa = document.getElementById('bahasa').value;
 
-                // Menampilkan nilai ke dalam div hasil
+                // Lempar ke area Hasil
                 document.getElementById('res-nik').innerText = nik;
                 document.getElementById('res-nama').innerText = nama;
                 document.getElementById('res-jk').innerText = jk;
@@ -119,10 +196,14 @@
                 document.getElementById('res-alamat').innerText = alamat;
                 document.getElementById('res-bahasa').innerText = bahasa;
 
-                // Memunculkan kotak hasil
-                document.getElementById('hasil-container').style.display = 'block';
+                // Tampilkan container hasil dengan scroll pelan ke bawah
+                let hasilContainer = document.getElementById('hasil-container');
+                hasilContainer.style.display = 'block';
+                
+                // Scroll otomatis ke kotak hasil
+                hasilContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-                // Mengosongkan form (opsional)
+                // Kosongkan form setelah submit
                 document.getElementById('formPendaftaran').reset();
             }
         });
