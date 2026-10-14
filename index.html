@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Coding Academy</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Global Reset & Styling */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f8fafc; 
+            color: #334155; 
+        }
+
+        /* Navigation Bar Modern */
+        nav { 
+            background: #1e293b; 
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: center; 
+            gap: 1rem; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        nav a { 
+            color: #cbd5e1; 
+            text-decoration: none; 
+            padding: 0.6rem 1.5rem; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+        }
+        nav a:hover { background: #334155; color: #fff; }
+        nav a.active { background: #3b82f6; color: #fff; }
+
+        /* Container & Header */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+        .page-title { 
+            text-align: center; 
+            margin: 3rem 0 2rem; 
+            color: #0f172a; 
+            font-size: 2.2rem; 
+            font-weight: 600; 
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Gallery Grid Layout */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        /* Card Styling */
+        .card { 
+            background: #fff; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            border: 1px solid #e2e8f0; 
+            animation: fadeIn 1s ease-out;
+        }
+        .card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); 
+        }
+        .card img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            border-bottom: 4px solid #3b82f6; 
+        }
+        .card-body { padding: 1.5rem; }
+        .card-body h3 { 
+            color: #1e293b; 
+            font-size: 1.3rem; 
+            margin-bottom: 0.8rem; 
+            font-weight: 600; 
+        }
+        .card-body p { color: #64748b; font-size: 0.95rem; line-height: 1.6; }
+
+        /* Simple Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="gallery.html" class="active">Gallery Kegiatan</a>
+        <a href="pendaftaran.html">Form Pendaftaran</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Gallery Coding Academy</h1>
+        
+        <div class="gallery-grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" alt="Pelatihan Golang">
+                <div class="card-body">
+                    <h3>Bootcamp Backend Development</h3>
+                    <p>Kegiatan intensif mempelajari arsitektur microservices dan pembuatan API menggunakan bahasa pemrograman Go (Golang).</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="Pelatihan Web">
+                <div class="card-body">
+                    <h3>Workshop Fundamental Web</h3>
+                    <p>Pelatihan dasar HTML, CSS, dan JavaScript untuk pemula yang ingin memulai karir sebagai Frontend Developer.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb" alt="Pelatihan DevOps">
+                <div class="card-body">
+                    <h3>Kelas DevOps & CI/CD</h3>
+                    <p>Praktik langsung pengenalan containerization dengan Docker, orkestrasi Kubernetes, dan setup pipeline GitHub Actions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
